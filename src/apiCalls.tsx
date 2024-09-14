@@ -1,3 +1,4 @@
+header("Access-Control-Allow-Origin: *");
 import axios from 'axios';
 
 
