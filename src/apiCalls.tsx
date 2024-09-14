@@ -1,11 +1,8 @@
-header("Access-Control-Allow-Origin: *");
 import axios from 'axios';
-
-
 
 const baseURL = 'https://codereview-backend-x6fq.onrender.com/api';
 
-// axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
 export const addreview = async (data) => {
     // console.log(data);
