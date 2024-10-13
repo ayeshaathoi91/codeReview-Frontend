@@ -269,12 +269,16 @@ function Survey() {
                  {/* make the table wider */}
                       
                 
-                
+                {/* Add padding */}
                  <table className="border border-green-600">
                    <thead>
                      <tr>
+                      {/*  var model_names = ['codereviewer', 
+                      'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 
+                      'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3']; */}
                       
-                       <th className="border border-green-600"> Generated Output </th>
+                       <th className="border border-green-600" style={{padding: '10px'}}> 
+                        Generated Output </th>
                        <th className="border border-green-600"> Relevance Score </th>
                        <th className="border border-green-600"> Information Score </th>
                        <th className="border border-green-600"> Explanation Clarity Score </th>
@@ -285,8 +289,10 @@ function Survey() {
                       
                      {/* Write a for loop using model's output */}
 
-
-                      <td className="border border-green-600">{formData.codereviewer}</td>
+                      <td className="border border-green-600 text-center">
+                        <textarea rows={4} cols={50} wrap="hard" value={formData.codellama} readOnly></textarea>
+                      
+                      </td>
                       <td className="border border-green-600">
                       <Rating
                       name="model_relevance_score[0]"
