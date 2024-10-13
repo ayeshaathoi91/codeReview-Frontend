@@ -24,77 +24,104 @@ import { da, tr } from 'date-fns/locale';
 
 
 
-
-interface codeReview {
-    microsoft_generated_comment : string;
-    our_review_comment : string;
-    patch_file : string;
-    data_id : number;
-}
-
 function Survey() {
     
     const [formData, setFormData] = useState<{
         data_id: number;
-        microsoft_generated_comment : string;
-        our_review_comment : string;
+        gold : string;
+        summary : string;
+        // model outputs
+        codereviewer : string;
+        codellama : string;
+        gemini : string;
+        gpt_3_5 : string;
+        gpt_3_5_both : string;
+        gpt_3_5_cg : string;
+        gpt_3_5_sum : string;
+        llama2 : string;
+        llama3 : string;
+
+        // --------------------
+
         patch_file : string;
         name: string;
         organization: string;
         proj: string;
         lang: string;
         comment: string;
-        rating_information: number;
-        rating_relevance: number;
+        model_information_score : number[];
+        model_relevance_score : number[];
+        model_explanation_clarity_score : number[],
     }>({
         data_id: -1,
-        microsoft_generated_comment : '',
-        our_review_comment : '',
+        gold : '',
+        summary : '',
+        // --------------------
+        codereviewer : '',
+        codellama : '',
+        gemini : '',
+        gpt_3_5 : '',
+        gpt_3_5_both : '',
+        gpt_3_5_cg : '',
+        gpt_3_5_sum : '',
+        llama2 : '',
+        llama3 : '',
+        // --------------------
         patch_file : '',
         name: '',
         organization: '',
         proj: '',
         lang: '',
         comment: '',
-        rating_information: 0,
-        rating_relevance: 0
+        model_information_score : [],
+        model_relevance_score : [],
+        model_explanation_clarity_score : [],
     });
 
     const fillForm = async () => {
       
         const res = await viewData(formData.lang).then((res) => {
-          // console.log(res);
-          // console.log({ ...formData, 
-          //   data_id: res.data_id,
-          //   microsoft_generated_comment: res.original,
-          //   our_review_comment: res.output,
-          //   patch_file: res.patch,
-          // });
+          console.log(res.data_id);
           setFormData({ ...formData, 
             data_id: res.data_id,
-            microsoft_generated_comment: res.original,
-            our_review_comment: res.output,
+            summary : res.summary,
+            gold: res.gold,
+            // model outputs
+            codereviewer: res.codereviewer,
+            codellama: res.codellama,
+            gemini: res.gemini,
+            gpt_3_5: res.gpt_3_5,
+            gpt_3_5_both: res.gpt_3_5_both,
+            gpt_3_5_cg: res.gpt_3_5_cg,
+            gpt_3_5_sum: res.gpt_3_5_sum,
+            llama2: res.llama2,
+            llama3: res.llama3,
+            // --------------------
+
             patch_file: res.patch,
+            
           });
-          
-          // console.log(formData);
         });
       
     };
+    var model_names = ['codereviewer', 'gpt_3_5_cg', 'codellama', 'gpt_3_5_both', 'gpt_3_5'];
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         if (!formData.name || !formData.organization) {
           alert("Please fill all the fields");
           return;
         }
         e.preventDefault();
+        
         try {
 
           const dataToSend = {
             name: formData.name,
             organization: formData.organization,
+            model : model_names,
             data_id: formData.data_id,
-            rating_information: formData.rating_information,
-            rating_relevance: formData.rating_relevance,
+            information : formData.model_information_score,
+            relevance: formData.model_relevance_score,
+            explanation_clarity: formData.model_explanation_clarity_score,
             comment: formData.comment,
           };
           await addreview(dataToSend);
@@ -104,11 +131,12 @@ function Survey() {
         }
 
         formData.data_id = -1;
-        formData.microsoft_generated_comment = '';
-        formData.our_review_comment = '';
+        formData.gold = '';
+        formData.model_output = [];
         formData.patch_file = '';
-        formData.rating_information = 0;
-        formData.rating_relevance = 0;
+        formData.model_information_score = [];
+        formData.model_relevance_score = [];
+        formData.model_explanation_clarity_score = [];
         formData.comment = '';
         formData.proj = '';
         fillForm();
@@ -156,7 +184,6 @@ function Survey() {
                     className="p-2 border-2 rounded-lg bg-white text-blue-500"
                   value={formData.lang}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) =>{
-                      console.log(e.target.value);
                         // setFormData({ 
                         //     ...formData, 
                         //     lang: e.target.value
@@ -181,78 +208,298 @@ function Survey() {
                 </div>
                 </div>
 
+                {/* Code Summary */}
+
+
+                
+                
                 <div className="flex flex-row mt-10 ml-20">
-                    <div style={{ flex: 1, width: '50%'}}>
-                    <Card className="p-4 mr-10" style={{width: '100%', overflow: 'scroll' }}>
-                            <Typography variant="h6" className="mb-4">
-                              <pre>
-                                {formData.patch_file}
-                                </pre>
-                            </Typography>
-                        </Card>
-                    </div>
-                    <div style={{ flex: 1 , width: '100%', paddingLeft: '5%'}}>
-                    <div style={{ flex: 1, width: '40%' }}>
-                        <big>Microsoft Generated Comment</big>
-                    </div>
-                    <div style={{ flex: 1, width: '80%' }}>
-                        <Card className="p-4 mr-10" style={{width: '100%', overflow: 'scroll'}}>
-                            <Typography variant="h6" className="mb-4">
-                            <pre>
-                                {formData.microsoft_generated_comment}
-                                </pre>
-                            </Typography>
-                        </Card>
-                       
-                        {/* <hr className="mt-4" /> */}
-
-                    </div>
-
-                    <div style={{ flex: 1, width: '40%', paddingTop: '5%' }}>
-                        <big>Our Model Generated Comment</big>
-                    </div>
-                    <div style={{ flex: 1, width: '80%' }}>
-                    <Card className="p-4 mr-10" style={{width: '100%', overflow: 'scroll'}}>
-                            <Typography variant="h6" className="mb-4">
-                            <pre>
-                                {formData.our_review_comment}
-                                </pre>
-                            </Typography>
-                        </Card>
-                    </div>
+                    <div style={{ flex: 1, width: '80%'}}>
+                    Code Summary : <br />   
+                    <Card className="p-4 mr-10">
                       
+                        <div class="word-wrap">
+                          {formData.summary}
+                          </div>
+
+                        </Card>
+                    </div>
+                </div>
+
+
+               
+                <div className="flex flex-row mt-10 ml-20">
+                    <div style={{ flex: 1, width: '80%'}}>
+                    Code Snippet : <br />
+                    <Card className="p-4 mr-10">
+                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
+                              <pre>
+                              <div class="word-wrap">
+                                {formData.patch_file}
+                                </div>
+                                </pre>
+                            </Typography>
+                        </Card>
                     </div>
                    
                 </div>
 
                 
+                <div className="flex flex-row mt-10 ml-20">
+                    <div style={{ flex: 1, width: '80%'}}>
+                    Ground Truth : <br />
+                    <Card className="p-4 mr-10">
+                            
+                              <div class="word-wrap">
+                                {formData.gold}
+                                </div>
 
-                <div className="flex flex-row mt-10 ">
-                <div style={{ flex: 1 }}>
-                <div className="flex justify-between mt-4 ml-20 mr-20">
-              <Typography >Rate our comment on basis of information : </Typography>
-              <Rating
-                name="rating_information"
-                value={formData.rating_information || 0}
-                onChange={(event, newValue) =>
-                    setFormData({ ...formData, rating_information: (newValue === null ? 0 : newValue) })
-                }
-              />
-            </div>
-            </div>
-            <div style={{ flex: 1 }}>
-            <div className="flex justify-between mt-4 mr-20">
-                <Typography component="legend">Rate our comment on basis of relevance : </Typography>
-                <Rating
-                    name="rating_relevance"
-                    value={formData.rating_relevance || 0}
-                    onChange={(event, newValue) =>
-                    setFormData({ ...formData, rating_relevance: (newValue === null ? 0 : newValue) })
-                    }
-                />
+                        </Card>
+                    </div>
+                   
                 </div>
-            </div>
-            </div>
+
+                <div className="flex flex-row mt-10 ml-20">
+                Rate the model's output using the respective metrics on a scale from 1 to 5,
+                where:
+                1 : Very bad , 2 : bad, 3 : Neutral , 4 : Good  , 5 : Very Good
+                </div>
+                <br />
+                <br />
+
+                <div align="center"> 
+                 {/* make the table wider */}
+                      
+                
+                {/* Add padding */}
+                 <table className="border border-green-600" style={{width: "90%"}}>
+                   <thead>
+                     <tr>
+                      {/*  var model_names = ['codereviewer', 
+                      'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 
+                      'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3']; */}
+                      
+                       <th className="border border-green-600" style={{width: "80%"}}> 
+                        Generated Output </th>
+                       <th className="border border-green-600"> Relevance Score </th>
+                       <th className="border border-green-600"> Information Score </th>
+                       <th className="border border-green-600"> Explanation Clarity Score </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     <tr>
+                      
+                     {/* Write a for loop using model's output */}
+                     
+
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
+                        <div class="word-wrap">
+
+                        {formData.codereviewer}
+                        </div>
+                        
+                      
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[0]"
+                      value={formData.model_relevance_score[0]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [newValue, ...formData.model_relevance_score.slice(1)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[0]"
+                      value={formData.model_information_score[0]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [newValue, ...formData.model_information_score.slice(1)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[0]"
+                      value={formData.model_explanation_clarity_score[0]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [newValue, ...formData.model_explanation_clarity_score.slice(1)] })
+                      }
+                      />
+                      </td>
+                      </tr>
+                      
+
+                      {/* gpt_3_5_cg */}
+                      <tr>
+
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
+                        <div class="word-wrap">
+
+                        {formData.gpt_3_5_cg}
+                        </div>
+                        
+                      
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[1]"
+                      value={formData.model_relevance_score[1]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], newValue, ...formData.model_relevance_score.slice(2)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[1]"
+                      value={formData.model_information_score[1]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [formData.model_information_score[0], newValue, ...formData.model_information_score.slice(2)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[1]"
+                      value={formData.model_explanation_clarity_score[1]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [formData.model_explanation_clarity_score[0], newValue, ...formData.model_explanation_clarity_score.slice(2)] })
+                      }
+                      />
+                      </td>
+                      </tr>
+
+                      {/* Codellama */}
+                      <tr>
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
+                        <div class="word-wrap">
+
+                        {formData.codellama}
+                        </div>
+
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[2]"
+                      value={formData.model_relevance_score[2]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], formData.model_relevance_score[1], newValue, ...formData.model_relevance_score.slice(3)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[2]"
+                      value={formData.model_information_score[2]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [formData.model_information_score[0], formData.model_information_score[1], newValue, ...formData.model_information_score.slice(3)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[2]"
+                      value={formData.model_explanation_clarity_score[2]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [formData.model_explanation_clarity_score[0], formData.model_explanation_clarity_score[1], newValue, ...formData.model_explanation_clarity_score.slice(3)] })
+                      }
+                      />
+                      </td>
+                      </tr>
+
+                      {/* GPT_3_5_Both */}
+                      <tr>
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
+                        <div class="word-wrap">
+
+                        {formData.gpt_3_5_both}
+                        </div>
+                      </td>
+
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[3]"
+                      value={formData.model_relevance_score[3]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], formData.model_relevance_score[1], newValue, ...formData.model_relevance_score.slice(4)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[3]"
+                      value={formData.model_information_score[3]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [formData.model_information_score[0], formData.model_information_score[1], newValue, ...formData.model_information_score.slice(4)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[3]"
+                      value={formData.model_explanation_clarity_score[3]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [formData.model_explanation_clarity_score[0], formData.model_explanation_clarity_score[1], newValue, ...formData.model_explanation_clarity_score.slice(4)] })
+                      }
+                      />
+                      </td>
+                      </tr>
+
+                      {/* GPT_3_5_without */}
+                      <tr>
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
+                        <div class="word-wrap">
+
+                        {formData.gpt_3_5}
+                        </div>
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[4]"
+                      value={formData.model_relevance_score[4]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], formData.model_relevance_score[1], formData.model_relevance_score[2], formData.model_relevance_score[3], newValue] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[4]"
+                      value={formData.model_information_score[4]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [formData.model_information_score[0], formData.model_information_score[1], formData.model_information_score[2], formData.model_information_score[3], newValue] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[4]"
+                      value={formData.model_explanation_clarity_score[4]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [formData.model_explanation_clarity_score[0], formData.model_explanation_clarity_score[1], formData.model_explanation_clarity_score[2], formData.model_explanation_clarity_score[3], newValue] })
+                      }
+                      />
+                      </td>
+                      </tr>
+
+
+
+                   </tbody>
+                 </table>
+               </div>
+
+
+
+
+
+
+               
+
+                
+
+                
+
             
             <div className="flex justify-between mt-4 ml-20 mr-10">
               <TextField
