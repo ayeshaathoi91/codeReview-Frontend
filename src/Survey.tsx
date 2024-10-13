@@ -74,7 +74,7 @@ function Survey() {
           setFormData({ ...formData, 
             data_id: res.data_id,
             summary : res.summary,
-            gold: res.original,
+            gold: res.gold,
             model_output: res.output,
             patch_file: res.patch,
           });
@@ -187,7 +187,7 @@ function Survey() {
 
                 {/* Code Summary */}
 
-                  {/* Make it Scrollable up down  */}
+                You can scroll right to see the full code summary
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '50%'}}>
                     <Card className="p-4 mr-10">
