@@ -235,69 +235,7 @@ function Survey() {
 
                 {/* Table with make border at center */}
 
-                <div align="center">  
-                  {/* make the table wider */}
-                        
-                  
-                  
-                  <table className="border border-green-600">
-                    <thead>
-                      <tr>
-                        
-                        <th className="border border-green-600"> Generated Output </th>
-                        <th className="border border-green-600"> Relevance Score </th>
-                        <th className="border border-green-600"> Information Score </th>
-                        <th className="border border-green-600"> Explanation Clarity Score </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        
-                      {/* Write a for loop using model's output */}
-
-                      {formData.model_output.map((output, index) => {
-                        return (
-                          <>
-                            <td className="border border-green-600"> {output} </td>
-                            <td className="border border-green-600">
-                              <Rating
-                                name="model_relevance_score"
-                                value={formData.model_relevance_score[index]}
-                                onChange={(e) => {
-                                  formData.model_relevance_score[index] = parseInt(e.target.value);
-                                  setFormData({ ...formData });
-                                }}
-                              />
-                            </td>
-                            <td className="border border-green-600">
-                              <Rating
-                                name="model_information_score"
-                                value={formData.model_information_score[index]}
-                                onChange={(e) => {
-                                  formData.model_information_score[index] = parseInt(e.target.value);
-                                  setFormData({ ...formData });
-                                }}
-                              />
-                            </td>
-                            <td className="border border-green-600">
-                              <Rating
-                                name="model_explanation_clarity_score"
-                                value={formData.model_explanation_clarity_score[index]}
-                                onChange={(e) => {
-                                  formData.model_explanation_clarity_score[index] = parseInt(e.target.value);
-                                  setFormData({ ...formData });
-                                }}
-                              />
-                            </td>
-                          </>
-                        );
-                      })}
-
-
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+               
 
                 
 
