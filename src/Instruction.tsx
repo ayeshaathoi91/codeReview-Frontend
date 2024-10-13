@@ -50,6 +50,9 @@ function Instruction() {
     <li>
       <strong>Explanation Clarity Score:</strong> How clearly the code review is explained.
     </li>
+    <li>
+      <strong>Scoring on the basis of review size:</strong> Evaluates whether the feedback length is appropriate, concise, and informative.
+    </li>
   </ul>
   <br />
 
