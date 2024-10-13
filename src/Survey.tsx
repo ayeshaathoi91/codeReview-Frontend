@@ -270,7 +270,7 @@ function Survey() {
                       
                 
                 {/* Add padding */}
-                 <table className="border border-green-600">
+                 <table className="border border-green-600" style={{width: "80%"}}>
                    <thead>
                      <tr>
                       {/*  var model_names = ['codereviewer', 
