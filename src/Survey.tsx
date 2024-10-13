@@ -247,7 +247,6 @@ function Survey() {
                     <div style={{ flex: 1, width: '80%'}}>
                     Ground Truth : <br />
                     <Card className="p-4 mr-10">
-                              <pre>
                               <div class="word-wrap">
                                 {formData.gold}
                                 </div>
@@ -284,7 +283,10 @@ function Survey() {
                      </tr>
                    </thead>
                    <tbody>
+                    {/* for loop */}
+
                      <tr>
+
                       
                      {/* Write a for loop using model's output */}
 
