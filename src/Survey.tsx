@@ -216,11 +216,11 @@ function Survey() {
                 
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
-                    You can scroll right!
+                    
                     <br />
                     <Card className="p-4 mr-10">
                       {/* Up down scroll */}
-                            <Typography variant="h6" className="mb-4" style={{overflow: 'scroll'}}>
+                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
                                 Code Summary : <br />   
                                 {formData.summary}
@@ -232,7 +232,7 @@ function Survey() {
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
                     <Card className="p-4 mr-10">
-                            <Typography variant="h6" className="mb-4" style={{overflow: 'scroll'}}>
+                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
                                 Code Snippet : <br />
                                 {formData.patch_file}
@@ -246,7 +246,7 @@ function Survey() {
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
                     <Card className="p-4 mr-10">
-                            <Typography variant="h6" className="mb-4" style={{overflow: 'scroll'}}>
+                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
                                 Ground Truth : <br />
                                 {formData.gold}
