@@ -26,7 +26,8 @@ import { da, tr } from 'date-fns/locale';
 
 
 interface codeReview {
-    ground_truth : string;
+    gold : string;
+    summary : string;
     // Array of outputs
     model_output : string[];
     patch_file : string;
@@ -37,7 +38,8 @@ function Survey() {
     
     const [formData, setFormData] = useState<{
         data_id: number;
-        ground_truth : string;
+        gold : string;
+        summary : string;
         model_output : string[];
         patch_file : string;
         name: string;
@@ -51,7 +53,8 @@ function Survey() {
 
     }>({
         data_id: -1,
-        ground_truth : '',
+        gold : '',
+        summary : string;
         model_output : [],
         patch_file : '',
         name: '',
@@ -70,7 +73,8 @@ function Survey() {
           console.log(res);
           setFormData({ ...formData, 
             data_id: res.data_id,
-            ground_truth: res.original,
+            summary : res.summary,
+            gold: res.original,
             model_output: res.output,
             patch_file: res.patch,
           });
@@ -103,7 +107,7 @@ function Survey() {
         }
 
         formData.data_id = -1;
-        formData.ground_truth = '';
+        formData.gold = '';
         formData.model_output = [];
         formData.patch_file = '';
         formData.model_information_score = [];
@@ -191,7 +195,7 @@ function Survey() {
                             <Typography variant="h6" className="mb-4" style={{width: '100%', overflow: 'scroll'}}>
                               <pre>
                                 Code Summary : <br />   
-                                {formData.ground_truth}
+                                {formData.summary}
                                 </pre>
                             </Typography>
                         </Card>
@@ -217,7 +221,7 @@ function Survey() {
                             <Typography variant="h6" className="mb-4" style={{width: '100%', overflow: 'scroll'}}>
                               <pre>
                                 Ground Truth : <br />
-                                {formData.ground_truth}
+                                {formData.gold}
                                 </pre>
                             </Typography>
                         </Card>
