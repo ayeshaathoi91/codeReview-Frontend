@@ -24,23 +24,25 @@ import { da, tr } from 'date-fns/locale';
 
 
 
-
-interface codeReview {
-    gold : string;
-    summary : string;
-    // Array of outputs
-    model_output : string[];
-    patch_file : string;
-    data_id : number;
-}
-
 function Survey() {
     
     const [formData, setFormData] = useState<{
         data_id: number;
         gold : string;
         summary : string;
-        model_output : string[];
+        // model outputs
+        codereviewer : string;
+        codellama : string;
+        gemini : string;
+        gpt_3_5 : string;
+        gpt_3_5_both : string;
+        gpt_3_5_cg : string;
+        gpt_3_5_sum : string;
+        llama2 : string;
+        llama3 : string;
+
+        // --------------------
+
         patch_file : string;
         name: string;
         organization: string;
@@ -50,13 +52,21 @@ function Survey() {
         model_information_score : number[];
         model_relevance_score : number[];
         model_explanation_clarity_score : number[],
-        model_name: string[];
-
     }>({
         data_id: -1,
         gold : '',
         summary : '',
-        model_output : [],
+        // --------------------
+        codereviewer : '',
+        codellama : '',
+        gemini : '',
+        gpt_3_5 : '',
+        gpt_3_5_both : '',
+        gpt_3_5_cg : '',
+        gpt_3_5_sum : '',
+        llama2 : '',
+        llama3 : '',
+        // --------------------
         patch_file : '',
         name: '',
         organization: '',
@@ -76,11 +86,23 @@ function Survey() {
             data_id: res.data_id,
             summary : res.summary,
             gold: res.gold,
-            model_output: res.output,
+            // model outputs
+            codereviewer: res.codereviewer,
+            codellama: res.codellama,
+            gemini: res.gemini,
+            gpt_3_5: res.gpt_3_5,
+            gpt_3_5_both: res.gpt_3_5_both,
+            gpt_3_5_cg: res.gpt_3_5_cg,
+            gpt_3_5_sum: res.gpt_3_5_sum,
+            llama2: res.llama2,
+            llama3: res.llama3,
+            // --------------------
+
             patch_file: res.patch,
+            
           });
           
-          // console.log(formData);
+          console.log(formData);
         });
       
     };
@@ -240,7 +262,64 @@ function Survey() {
                 <br />
                 <br />
 
-                {/* Table with make border at center */}
+                <div align="center"> 
+                 {/* make the table wider */}
+                      
+                
+                
+                 <table className="border border-green-600">
+                   <thead>
+                     <tr>
+                      
+                       <th className="border border-green-600"> Generated Output </th>
+                       <th className="border border-green-600"> Relevance Score </th>
+                       <th className="border border-green-600"> Information Score </th>
+                       <th className="border border-green-600"> Explanation Clarity Score </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     <tr>
+                      
+                     {/* Write a for loop using model's output */}
+
+
+                      <td className="border border-green-600">{formData.codereviewer}</td>
+                      <td className="border border-green-600">
+                        <Rating
+                          name="model_relevance_score"
+                          value={formData.model_relevance_score[0]}
+                          onChange={(e) => {
+                            formData.model_relevance_score[0] = e.target.value;
+                          }}
+                        />
+                      </td>
+                      <td className="border border-green-600">
+                        <Rating
+                          name="model_information_score"
+                          value={formData.model_information_score[0]}
+                          onChange={(e) => {
+                            formData.model_information_score[0] = e.target.value;
+                          }}
+                        />
+                      </td>
+                      <td className="border border-green-600">
+                        <Rating
+                          name="model_explanation_clarity_score"
+                          value={formData.model_explanation_clarity_score[0]}
+                          onChange={(e) => {
+                            formData.model_explanation_clarity_score[0] = e.target.value;
+                          }}
+                        />
+                      </td>
+                     </tr>
+
+                     
+                   </tbody>
+                 </table>
+               </div>
+
+
+
 
                
 
