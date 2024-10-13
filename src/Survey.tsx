@@ -338,6 +338,7 @@ function Survey() {
                       
 
                       {/* Codellama */}
+                      <tr>
 
                       <td className="border border-green-600 text-center" style={{width: "70%"}}>
                         <div class="word-wrap">
@@ -355,10 +356,26 @@ function Survey() {
                           setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], newValue, ...formData.model_relevance_score.slice(2)] })
                       }
                       />
-
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[1]"
+                      value={formData.model_information_score[1]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [formData.model_information_score[0], newValue, ...formData.model_information_score.slice(2)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[1]"
+                      value={formData.model_explanation_clarity_score[1]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [formData.model_explanation_clarity_score[0], newValue, ...formData.model_explanation_clarity_score.slice(2)] })
+                      }
+                      />
                       </td>
                       </tr>
-                     
 
 
                    </tbody>
