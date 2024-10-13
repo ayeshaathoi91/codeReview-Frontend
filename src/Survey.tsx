@@ -216,43 +216,37 @@ function Survey() {
                 
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
-                    
-                    <br />
-                    <Card className="p-4 mr-10">
-                      {/* Up down scroll */}
-                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
-                              <pre>
-                                Code Summary : <br />   
-                                {formData.summary}
-                                </pre>
-                            </Typography>
-                        </Card>
+                    <Typography className="mb-4" style={{overflow: 'scroll'}}>
+                      <pre>
+                        Code Summary : <br />   
+                        {formData.summary}
+                        </pre>
+                    </Typography>
                     </div>
                 </div>
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
-                    <Card className="p-4 mr-10">
-                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
-                              <pre>
-                                Code Snippet : <br />
-                                {formData.patch_file}
-                                </pre>
-                            </Typography>
-                        </Card>
+                   
+                      <Typography className="mb-4" style={{overflow: 'scroll'}}>
+                        <pre>
+                          Code Snippet : <br />
+                          {formData.patch_file}
+                          </pre>
+                      </Typography>
                     </div>
                    
                 </div>
 
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
-                    <Card className="p-4 mr-10">
+                    {/* <Card className="p-4 mr-10"> */}
                             <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
                                 Ground Truth : <br />
                                 {formData.gold}
                                 </pre>
                             </Typography>
-                        </Card>
+                        {/* </Card> */}
                     </div>
                    
                 </div>
