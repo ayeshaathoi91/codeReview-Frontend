@@ -221,7 +221,7 @@ function Survey() {
                     Code Summary : <br />   
                     <Card className="p-4 mr-10">
                       {/* Up down scroll */}
-                            <Typography className="mb-4">
+                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
                               <div class="word-wrap">
                                 {formData.summary}
@@ -238,7 +238,7 @@ function Survey() {
                     <div style={{ flex: 1, width: '80%'}}>
                     Code Snippet : <br />
                     <Card className="p-4 mr-10">
-                            <Typography className="mb-4">
+                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
                               <div class="word-wrap">
                                 {formData.patch_file}
@@ -255,7 +255,7 @@ function Survey() {
                     <div style={{ flex: 1, width: '80%'}}>
                     Ground Truth : <br />
                     <Card className="p-4 mr-10">
-                            <Typography className="mb-4">
+                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
                               <div class="word-wrap">
                                 {formData.gold}
@@ -338,7 +338,7 @@ function Survey() {
                       
 
                       {/* Codellama */}
-                      {/* <tr>
+                      <tr>
 
                       <td className="border border-green-600 text-center" style={{width: "70%"}}>
                         <div class="word-wrap">
@@ -375,7 +375,7 @@ function Survey() {
                       }
                       />
                       </td>
-                      </tr> */}
+                      </tr>
 
                    </tbody>
                  </table>
