@@ -106,7 +106,7 @@ function Survey() {
         });
       
     };
-    var model_names = ['codereviewer', 'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3'];
+    var model_names = ['codereviewer', 'gpt_3_5_cg', 'codellama', 'gpt_3_5_both', 'gpt_3_5'];
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         if (!formData.name || !formData.organization) {
           alert("Please fill all the fields");
@@ -224,6 +224,7 @@ function Survey() {
                         <div class="word-wrap">
                           {formData.summary}
                           </div>
+
                         </Card>
                     </div>
                 </div>
@@ -234,9 +235,13 @@ function Survey() {
                     <div style={{ flex: 1, width: '80%'}}>
                     Code Snippet : <br />
                     <Card className="p-4 mr-10">
+                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
+                              <pre>
                               <div class="word-wrap">
                                 {formData.patch_file}
                                 </div>
+                                </pre>
+                            </Typography>
                         </Card>
                     </div>
                    
@@ -247,9 +252,11 @@ function Survey() {
                     <div style={{ flex: 1, width: '80%'}}>
                     Ground Truth : <br />
                     <Card className="p-4 mr-10">
+                            
                               <div class="word-wrap">
                                 {formData.gold}
                                 </div>
+
                         </Card>
                     </div>
                    
@@ -283,12 +290,10 @@ function Survey() {
                      </tr>
                    </thead>
                    <tbody>
-                    {/* for loop */}
-
                      <tr>
-
                       
                      {/* Write a for loop using model's output */}
+                     
 
                       <td className="border border-green-600 text-center" style={{width: "70%"}}>
                         <div class="word-wrap">
@@ -328,13 +333,13 @@ function Survey() {
                       </tr>
                       
 
-                      {/* Codellama */}
+                      {/* gpt_3_5_cg */}
                       <tr>
 
                       <td className="border border-green-600 text-center" style={{width: "70%"}}>
                         <div class="word-wrap">
 
-                        {formData.codellama}
+                        {formData.gpt_3_5_cg}
                         </div>
                         
                       
@@ -368,9 +373,126 @@ function Survey() {
                       </td>
                       </tr>
 
+                      {/* Codellama */}
+                      <tr>
+                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                        <div class="word-wrap">
+
+                        {formData.codellama}
+                        </div>
+
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[2]"
+                      value={formData.model_relevance_score[2]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], formData.model_relevance_score[1], newValue, ...formData.model_relevance_score.slice(3)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[2]"
+                      value={formData.model_information_score[2]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [formData.model_information_score[0], formData.model_information_score[1], newValue, ...formData.model_information_score.slice(3)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[2]"
+                      value={formData.model_explanation_clarity_score[2]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [formData.model_explanation_clarity_score[0], formData.model_explanation_clarity_score[1], newValue, ...formData.model_explanation_clarity_score.slice(3)] })
+                      }
+                      />
+                      </td>
+                      </tr>
+
+                      {/* GPT_3_5_Both */}
+                      <tr>
+                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                        <div class="word-wrap">
+
+                        {formData.gpt_3_5_both}
+                        </div>
+                      </td>
+
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[3]"
+                      value={formData.model_relevance_score[3]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], formData.model_relevance_score[1], newValue, ...formData.model_relevance_score.slice(4)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[3]"
+                      value={formData.model_information_score[3]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [formData.model_information_score[0], formData.model_information_score[1], newValue, ...formData.model_information_score.slice(4)] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[3]"
+                      value={formData.model_explanation_clarity_score[3]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [formData.model_explanation_clarity_score[0], formData.model_explanation_clarity_score[1], newValue, ...formData.model_explanation_clarity_score.slice(4)] })
+                      }
+                      />
+                      </td>
+                      </tr>
+
+                      {/* GPT_3_5_without */}
+                      <tr>
+                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                        <div class="word-wrap">
+
+                        {formData.gpt_3_5}
+                        </div>
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[4]"
+                      value={formData.model_relevance_score[4]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], formData.model_relevance_score[1], formData.model_relevance_score[2], formData.model_relevance_score[3], newValue] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_information_score[4]"
+                      value={formData.model_information_score[4]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [formData.model_information_score[0], formData.model_information_score[1], formData.model_information_score[2], formData.model_information_score[3], newValue] })
+                      }
+                      />
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_explanation_clarity_score[4]"
+                      value={formData.model_explanation_clarity_score[4]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [formData.model_explanation_clarity_score[0], formData.model_explanation_clarity_score[1], formData.model_explanation_clarity_score[2], formData.model_explanation_clarity_score[3], newValue] })
+                      }
+                      />
+                      </td>
+                      </tr>
+                      
+
+
                    </tbody>
                  </table>
                </div>
+
+
 
 
 
