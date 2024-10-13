@@ -220,14 +220,10 @@ function Survey() {
                     <div style={{ flex: 1, width: '80%'}}>
                     Code Summary : <br />   
                     <Card className="p-4 mr-10">
-                      {/* Up down scroll */}
-                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
-                              <pre>
-                              <div class="word-wrap">
-                                {formData.summary}
-                                </div>
-                                </pre>
-                            </Typography>
+                      
+                        <div class="word-wrap">
+                          {formData.summary}
+                          </div>
                         </Card>
                     </div>
                 </div>
@@ -238,13 +234,9 @@ function Survey() {
                     <div style={{ flex: 1, width: '80%'}}>
                     Code Snippet : <br />
                     <Card className="p-4 mr-10">
-                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
-                              <pre>
                               <div class="word-wrap">
                                 {formData.patch_file}
                                 </div>
-                                </pre>
-                            </Typography>
                         </Card>
                     </div>
                    
@@ -255,13 +247,10 @@ function Survey() {
                     <div style={{ flex: 1, width: '80%'}}>
                     Ground Truth : <br />
                     <Card className="p-4 mr-10">
-                            <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
                               <div class="word-wrap">
                                 {formData.gold}
                                 </div>
-                                </pre>
-                            </Typography>
                         </Card>
                     </div>
                    
