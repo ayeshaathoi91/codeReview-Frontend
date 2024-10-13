@@ -287,11 +287,13 @@ function Survey() {
                    <tbody>
                      <tr>
                       
-                     {/* Write a for loop using model's output */}
+                     {/* wrap up the text */}
 
-                      <td className="border border-green-600 text-center">
-                        <textarea rows={4} cols={50} wrap="hard" value={formData.codereviewer} readOnly></textarea>
-                      
+                      <td className="border border-green-600 p-2">
+                      <Typography variant="h6" className="mb-4" style={{width: '100%', overflow: 'scroll'}}>
+                        <pre>
+                          {formData.codereviewer}
+                        </pre>
                       </td>
                       <td className="border border-green-600">
                       <Rating
