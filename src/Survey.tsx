@@ -215,9 +215,10 @@ function Survey() {
 
 
                 
-                Code Summary : <br />   0
+                
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
+                    Code Summary : <br />   
                     <Card className="p-4 mr-10">
                       {/* Up down scroll */}
                             <Typography className="mb-4" style={{overflow: 'scroll'}}>
@@ -232,10 +233,10 @@ function Survey() {
                 </div>
 
 
-                Code Snippet : <br />
+               
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
-                    
+                    Code Snippet : <br />
                     <Card className="p-4 mr-10">
                             <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
@@ -249,9 +250,10 @@ function Survey() {
                    
                 </div>
 
-                Ground Truth : <br />
+                
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
+                    Ground Truth : <br />
                     <Card className="p-4 mr-10">
                             <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
@@ -334,6 +336,28 @@ function Survey() {
                       </td>
                       </tr>
                       
+
+                      {/* Codellama */}
+
+                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                        <div class="word-wrap">
+
+                        {formData.codellama}
+                        </div>
+                        
+                      
+                      </td>
+                      <td className="border border-green-600">
+                      <Rating
+                      name="model_relevance_score[1]"
+                      value={formData.model_relevance_score[1]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [formData.model_relevance_score[0], newValue, ...formData.model_relevance_score.slice(2)] })
+                      }
+                      />
+
+                      </td>
+                      </tr>
                      
 
 
