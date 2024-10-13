@@ -187,9 +187,11 @@ function Survey() {
 
                 {/* Code Summary */}
 
-                You can scroll right to see the full code summary
+                
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '50%'}}>
+                    You can scroll right!
+                    <br />
                     <Card className="p-4 mr-10">
                       {/* Up down scroll */}
                             <Typography variant="h6" className="mb-4" style={{width: '100%', overflow: 'scroll'}}>
