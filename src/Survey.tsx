@@ -290,9 +290,7 @@ function Survey() {
                      {/* Write a for loop using model's output */}
 
                       <td className="border border-green-600 text-center">
-                        <textarea rows={4} cols={50} wrap="hard">
-                          {formData.codereviewer}
-                        </textarea>
+                        <textarea rows={4} cols={50} wrap="hard" value={formData.codereviewer} readOnly></textarea>
                       
                       </td>
                       <td className="border border-green-600">
