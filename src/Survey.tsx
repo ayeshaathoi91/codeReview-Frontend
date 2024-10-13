@@ -54,7 +54,7 @@ function Survey() {
     }>({
         data_id: -1,
         gold : '',
-        summary : string;
+        summary : '',
         model_output : [],
         patch_file : '',
         name: '',
