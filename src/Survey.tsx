@@ -26,8 +26,9 @@ import { da, tr } from 'date-fns/locale';
 
 
 interface codeReview {
-    microsoft_generated_comment : string;
-    our_review_comment : string;
+    ground_truth : string;
+    // Array of outputs
+    model_output : string[];
     patch_file : string;
     data_id : number;
 }
@@ -36,28 +37,31 @@ function Survey() {
     
     const [formData, setFormData] = useState<{
         data_id: number;
-        microsoft_generated_comment : string;
-        our_review_comment : string;
+        ground_truth : string;
+        model_output : string[];
         patch_file : string;
         name: string;
         organization: string;
         proj: string;
         lang: string;
         comment: string;
-        rating_information: number;
-        rating_relevance: number;
+        model_information_score : number[];
+        model_relevance_score : number[];
+        model_explanation_clarity_score : number[];
+
     }>({
         data_id: -1,
-        microsoft_generated_comment : '',
-        our_review_comment : '',
+        ground_truth : '',
+        model_output : [],
         patch_file : '',
         name: '',
         organization: '',
         proj: '',
         lang: '',
         comment: '',
-        rating_information: 0,
-        rating_relevance: 0
+        model_information_score : [],
+        model_relevance_score : [],
+        model_explanation_clarity_score : [],
     });
 
     const fillForm = async () => {
@@ -66,14 +70,14 @@ function Survey() {
           // console.log(res);
           // console.log({ ...formData, 
           //   data_id: res.data_id,
-          //   microsoft_generated_comment: res.original,
-          //   our_review_comment: res.output,
+          //   ground_truth: res.original,
+          //   gpt_three_output_both: res.output,
           //   patch_file: res.patch,
           // });
           setFormData({ ...formData, 
             data_id: res.data_id,
-            microsoft_generated_comment: res.original,
-            our_review_comment: res.output,
+            ground_truth: res.original,
+            model_output: res.output,
             patch_file: res.patch,
           });
           
@@ -93,8 +97,9 @@ function Survey() {
             name: formData.name,
             organization: formData.organization,
             data_id: formData.data_id,
-            rating_information: formData.rating_information,
-            rating_relevance: formData.rating_relevance,
+            model_information_score: formData.model_information_score,
+            model_relevance_score: formData.model_relevance_score,
+            model_explanation_clarity_score: formData.model_explanation_clarity_score,
             comment: formData.comment,
           };
           await addreview(dataToSend);
@@ -104,11 +109,12 @@ function Survey() {
         }
 
         formData.data_id = -1;
-        formData.microsoft_generated_comment = '';
-        formData.our_review_comment = '';
+        formData.ground_truth = '';
+        formData.model_output = [];
         formData.patch_file = '';
-        formData.rating_information = 0;
-        formData.rating_relevance = 0;
+        formData.model_information_score = [];
+        formData.model_relevance_score = [];
+        formData.model_explanation_clarity_score = [];
         formData.comment = '';
         formData.proj = '';
         fillForm();
@@ -181,78 +187,128 @@ function Survey() {
                 </div>
                 </div>
 
+                {/* Code Summary */}
+
+                  {/* Make it Scrollable up down  */}
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '50%'}}>
-                    <Card className="p-4 mr-10" style={{width: '100%', overflow: 'scroll' }}>
-                            <Typography variant="h6" className="mb-4">
+                    <Card className="p-4 mr-10">
+                      {/* Up down scroll */}
+                            <Typography variant="h6" className="mb-4" style={{width: '100%', overflow: 'scroll'}}>
                               <pre>
+                                Code Summary : <br />   
+                                {formData.ground_truth}
+                                </pre>
+                            </Typography>
+                        </Card>
+                    </div>
+                </div>
+                <div className="flex flex-row mt-10 ml-20">
+                    <div style={{ flex: 1, width: '50%'}}>
+                    <Card className="p-4 mr-10">
+                            <Typography variant="h6" className="mb-4" style={{width: '100%', overflow: 'scroll'}}>
+                              <pre>
+                                Code Snippet : <br />
                                 {formData.patch_file}
                                 </pre>
                             </Typography>
                         </Card>
                     </div>
-                    <div style={{ flex: 1 , width: '100%', paddingLeft: '5%'}}>
-                    <div style={{ flex: 1, width: '40%' }}>
-                        <big>Microsoft Generated Comment</big>
-                    </div>
-                    <div style={{ flex: 1, width: '80%' }}>
-                        <Card className="p-4 mr-10" style={{width: '100%', overflow: 'scroll'}}>
-                            <Typography variant="h6" className="mb-4">
-                            <pre>
-                                {formData.microsoft_generated_comment}
+                   
+                </div>
+
+                <div className="flex flex-row mt-10 ml-20">
+                    <div style={{ flex: 1, width: '50%'}}>
+                    <Card className="p-4 mr-10">
+                            <Typography variant="h6" className="mb-4" style={{width: '100%', overflow: 'scroll'}}>
+                              <pre>
+                                Ground Truth : <br />
+                                {formData.ground_truth}
                                 </pre>
                             </Typography>
                         </Card>
-                       
-                        {/* <hr className="mt-4" /> */}
-
-                    </div>
-
-                    <div style={{ flex: 1, width: '40%', paddingTop: '5%' }}>
-                        <big>Our Model Generated Comment</big>
-                    </div>
-                    <div style={{ flex: 1, width: '80%' }}>
-                    <Card className="p-4 mr-10" style={{width: '100%', overflow: 'scroll'}}>
-                            <Typography variant="h6" className="mb-4">
-                            <pre>
-                                {formData.our_review_comment}
-                                </pre>
-                            </Typography>
-                        </Card>
-                    </div>
-                      
                     </div>
                    
                 </div>
 
+                <div className="flex flex-row mt-10 ml-20">
+                Rate the model's output using the respective metrics on a scale from 1 to 5,
+                where:
+                1 : Very bad , 2 : bad, 3 : Neutral , 4 : Good  , 5 : Very Good
+                </div>
+                <br />
+                <br />
+
+                {/* Table with make border at center */}
+
+                <div align="center">  
+                  {/* make the table wider */}
+                        
+                  
+                  
+                  <table className="border border-green-600">
+                    <thead>
+                      <tr>
+                        
+                        <th className="border border-green-600"> Generated Output </th>
+                        <th className="border border-green-600"> Relevance Score </th>
+                        <th className="border border-green-600"> Information Score </th>
+                        <th className="border border-green-600"> Explanation Clarity Score </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                      {/* Write a for loop using model's output */}
+
+                      {formData.model_output.map((output, index) => {
+                        return (
+                          <>
+                            <td className="border border-green-600"> {output} </td>
+                            <td className="border border-green-600">
+                              <Rating
+                                name="model_relevance_score"
+                                value={formData.model_relevance_score[index]}
+                                onChange={(e) => {
+                                  formData.model_relevance_score[index] = parseInt(e.target.value);
+                                  setFormData({ ...formData });
+                                }}
+                              />
+                            </td>
+                            <td className="border border-green-600">
+                              <Rating
+                                name="model_information_score"
+                                value={formData.model_information_score[index]}
+                                onChange={(e) => {
+                                  formData.model_information_score[index] = parseInt(e.target.value);
+                                  setFormData({ ...formData });
+                                }}
+                              />
+                            </td>
+                            <td className="border border-green-600">
+                              <Rating
+                                name="model_explanation_clarity_score"
+                                value={formData.model_explanation_clarity_score[index]}
+                                onChange={(e) => {
+                                  formData.model_explanation_clarity_score[index] = parseInt(e.target.value);
+                                  setFormData({ ...formData });
+                                }}
+                              />
+                            </td>
+                          </>
+                        );
+                      })}
+
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
                 
 
-                <div className="flex flex-row mt-10 ">
-                <div style={{ flex: 1 }}>
-                <div className="flex justify-between mt-4 ml-20 mr-20">
-              <Typography >Rate our comment on basis of information : </Typography>
-              <Rating
-                name="rating_information"
-                value={formData.rating_information || 0}
-                onChange={(event, newValue) =>
-                    setFormData({ ...formData, rating_information: (newValue === null ? 0 : newValue) })
-                }
-              />
-            </div>
-            </div>
-            <div style={{ flex: 1 }}>
-            <div className="flex justify-between mt-4 mr-20">
-                <Typography component="legend">Rate our comment on basis of relevance : </Typography>
-                <Rating
-                    name="rating_relevance"
-                    value={formData.rating_relevance || 0}
-                    onChange={(event, newValue) =>
-                    setFormData({ ...formData, rating_relevance: (newValue === null ? 0 : newValue) })
-                    }
-                />
-                </div>
-            </div>
-            </div>
+                
+
             
             <div className="flex justify-between mt-4 ml-20 mr-10">
               <TextField
