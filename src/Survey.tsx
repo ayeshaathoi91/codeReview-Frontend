@@ -289,8 +289,8 @@ function Survey() {
                       
                      {/* Write a for loop using model's output */}
 
-                      <td className="border border-green-600 text-center">
-                        <div class="word-break: break-all">
+                      <td className="border border-green-600 text-center"  style={{width: '200px'}}>
+                        <div class="word-wrap">
 
                         {formData.codereviewer}
                         </div>
