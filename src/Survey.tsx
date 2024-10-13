@@ -21,6 +21,7 @@ import {
 import Header from './Header';
 import Footer from './Footer';
 import { da, tr } from 'date-fns/locale';
+import { wrap } from 'module';
 
 
 
@@ -290,7 +291,7 @@ function Survey() {
                      {/* wrap up the text */}
 
                       <td className="border border-green-600 p-2">
-                      <Typography variant="h6" className="mb-4" style={{width: '100%', overflow: 'scroll'}}>
+                      <Typography variant="h6" className="mb-4" style={{width: '100%', wrap: 'wrap'}}>
                         <pre>
                           {formData.codereviewer}
                         </pre>
