@@ -49,7 +49,8 @@ function Survey() {
         comment: string;
         model_information_score : number[];
         model_relevance_score : number[];
-        model_explanation_clarity_score : number[];
+        model_explanation_clarity_score : number[],
+        model_name: string[];
 
     }>({
         data_id: -1,

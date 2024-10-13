@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: "/codeReview-Frontend/",
+  base: "/Instruction/",
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },
