@@ -277,7 +277,7 @@ function Survey() {
                       'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 
                       'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3']; */}
                       
-                       <th className="border border-green-600" style={{width: '200px'}}> 
+                       <th className="border border-green-600" style={{width: 70%}}> 
                         Generated Output </th>
                        <th className="border border-green-600"> Relevance Score </th>
                        <th className="border border-green-600"> Information Score </th>
@@ -289,7 +289,7 @@ function Survey() {
                       
                      {/* Write a for loop using model's output */}
 
-                      <td className="border border-green-600 text-center"  style={{width: '200px'}}>
+                      <td className="border border-green-600 text-center">
                         <div class="word-wrap">
 
                         {formData.codereviewer}
