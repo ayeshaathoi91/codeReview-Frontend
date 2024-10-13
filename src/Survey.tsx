@@ -106,13 +106,14 @@ function Survey() {
         });
       
     };
+    var model_names = ['codereviewer', 'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3'];
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         if (!formData.name || !formData.organization) {
           alert("Please fill all the fields");
           return;
         }
         e.preventDefault();
-        const model_names = ['codereviewer', 'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3'];
+        
         try {
 
           const dataToSend = {
