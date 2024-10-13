@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Survey from './Survey.tsx';
-import Instruction from './Instruction.tsx';
+import Survey from './Survey';
+import NotFound from './notFound';
 
 export function App() {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/codeReview/Survey/" element={<Survey />} />
-          <Route path="/codeReview/" element={<Instruction />} />
+          <Route path="/codeReview-Frontend/" element={<Survey />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         </BrowserRouter>
     );
