@@ -21,7 +21,6 @@ import {
 import Header from './Header';
 import Footer from './Footer';
 import { da, tr } from 'date-fns/locale';
-import { wrap } from 'module';
 
 
 
@@ -288,14 +287,15 @@ function Survey() {
                    <tbody>
                      <tr>
                       
-                     {/* wrap up the text */}
+                     {/* Write a for loop using model's output */}
 
-                      <td className="border border-green-600 p-2">
-                      <Typography variant="h6" className="mb-4" style={{width: '100%', wrap: 'wrap'}}>
-                        <pre>
-                          {formData.codereviewer}
-                        </pre>
-                        </Typography>
+                      <td className="border border-green-600 text-center">
+                        <div class="word-break: break-all">
+
+                        {formData.codereviewer}
+                        </div>
+                        
+                      
                       </td>
                       <td className="border border-green-600">
                       <Rating
