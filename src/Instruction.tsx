@@ -57,7 +57,7 @@ function Instruction() {
   <br />
 
   <h2>
-    <Link to="/codeReview-Frontend/" className="text-blue-500">
+    <Link to="/codeReview/Survey" className="text-blue-500">
     Let’s Get Started!
     </Link>
 
