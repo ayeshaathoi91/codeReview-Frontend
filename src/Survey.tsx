@@ -213,27 +213,35 @@ function Survey() {
 
                 {/* Code Summary */}
 
+
                 
+                Code Summary : <br />   0
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
-                    <Card>
+                    <Card className="p-4 mr-10">
                       {/* Up down scroll */}
                             <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
-                                Code Summary : <br />   
+                              <div class="word-wrap">
                                 {formData.summary}
+                                </div>
                                 </pre>
                             </Typography>
                         </Card>
                     </div>
                 </div>
+
+
+                Code Snippet : <br />
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
-                    <Card>
+                    
+                    <Card className="p-4 mr-10">
                             <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
-                                Code Snippet : <br />
+                              <div class="word-wrap">
                                 {formData.patch_file}
+                                </div>
                                 </pre>
                             </Typography>
                         </Card>
@@ -241,13 +249,15 @@ function Survey() {
                    
                 </div>
 
+                Ground Truth : <br />
                 <div className="flex flex-row mt-10 ml-20">
                     <div style={{ flex: 1, width: '80%'}}>
-                    <Card>
+                    <Card className="p-4 mr-10">
                             <Typography className="mb-4" style={{overflow: 'scroll'}}>
                               <pre>
-                                Ground Truth : <br />
+                              <div class="word-wrap">
                                 {formData.gold}
+                                </div>
                                 </pre>
                             </Typography>
                         </Card>
