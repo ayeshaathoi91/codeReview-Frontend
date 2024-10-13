@@ -6,8 +6,8 @@ export function App() {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/codeReview-Frontend/" element={<Survey />} />
-          <Route path="/Instruction/" element={<Instruction />} />
+          <Route path="/codeReview/Survey" element={<Survey />} />
+          <Route path="/codeReview/" element={<Instruction />} />
         </Routes>
         </BrowserRouter>
     );

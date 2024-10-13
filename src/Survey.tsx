@@ -81,7 +81,7 @@ function Survey() {
     const fillForm = async () => {
       
         const res = await viewData(formData.lang).then((res) => {
-          console.log(res);
+          console.log(res.data_id);
           setFormData({ ...formData, 
             data_id: res.data_id,
             summary : res.summary,
@@ -101,8 +101,6 @@ function Survey() {
             patch_file: res.patch,
             
           });
-          
-          console.log(formData);
         });
       
     };
@@ -186,7 +184,6 @@ function Survey() {
                     className="p-2 border-2 rounded-lg bg-white text-blue-500"
                   value={formData.lang}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) =>{
-                      console.log(e.target.value);
                         // setFormData({ 
                         //     ...formData, 
                         //     lang: e.target.value
@@ -275,14 +272,14 @@ function Survey() {
                       
                 
                 {/* Add padding */}
-                 <table className="border border-green-600" style={{width: "80%"}}>
+                 <table className="border border-green-600" style={{width: "90%"}}>
                    <thead>
                      <tr>
                       {/*  var model_names = ['codereviewer', 
                       'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 
                       'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3']; */}
                       
-                       <th className="border border-green-600" style={{width: "70%"}}> 
+                       <th className="border border-green-600" style={{width: "80%"}}> 
                         Generated Output </th>
                        <th className="border border-green-600"> Relevance Score </th>
                        <th className="border border-green-600"> Information Score </th>
@@ -295,7 +292,7 @@ function Survey() {
                      {/* Write a for loop using model's output */}
                      
 
-                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
                         <div class="word-wrap">
 
                         {formData.codereviewer}
@@ -336,7 +333,7 @@ function Survey() {
                       {/* gpt_3_5_cg */}
                       <tr>
 
-                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
                         <div class="word-wrap">
 
                         {formData.gpt_3_5_cg}
@@ -375,7 +372,7 @@ function Survey() {
 
                       {/* Codellama */}
                       <tr>
-                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
                         <div class="word-wrap">
 
                         {formData.codellama}
@@ -413,7 +410,7 @@ function Survey() {
 
                       {/* GPT_3_5_Both */}
                       <tr>
-                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
                         <div class="word-wrap">
 
                         {formData.gpt_3_5_both}
@@ -451,7 +448,7 @@ function Survey() {
 
                       {/* GPT_3_5_without */}
                       <tr>
-                      <td className="border border-green-600 text-center" style={{width: "70%"}}>
+                      <td className="border border-green-600 text-center" style={{width: "80%"}}>
                         <div class="word-wrap">
 
                         {formData.gpt_3_5}
@@ -485,7 +482,7 @@ function Survey() {
                       />
                       </td>
                       </tr>
-                      
+
 
 
                    </tbody>

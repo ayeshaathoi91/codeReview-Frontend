@@ -6,7 +6,7 @@ import Footer from './Footer';
 
 
 
-function NotFound() {
+function Instruction() {
   return (
     <>
     <div>
@@ -63,8 +63,7 @@ function NotFound() {
 
   </h2>
 </div>
-      <Footer />
     </>
   );
 }
-export default NotFound;
+export default Instruction;

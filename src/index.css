@@ -2,12 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-
-table {
-    width: 140px;
-    border: 1px solid #bbb
-}
-
-.tdbreak {
-    word-break: break-all
-}
