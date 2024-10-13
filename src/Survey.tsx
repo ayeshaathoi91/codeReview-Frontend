@@ -67,13 +67,7 @@ function Survey() {
     const fillForm = async () => {
       
         const res = await viewData(formData.lang).then((res) => {
-          // console.log(res);
-          // console.log({ ...formData, 
-          //   data_id: res.data_id,
-          //   ground_truth: res.original,
-          //   gpt_three_output_both: res.output,
-          //   patch_file: res.patch,
-          // });
+          console.log(res);
           setFormData({ ...formData, 
             data_id: res.data_id,
             ground_truth: res.original,
