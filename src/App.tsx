@@ -7,7 +7,7 @@ export function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/codeReview-Frontend/" element={<Survey />} />
-          <Route path="/Instruction/" element={<Instruction />} />
+          <Route path="/codeReview-Frontend/Instruction/" element={<Instruction />} />
         </Routes>
         </BrowserRouter>
     );
