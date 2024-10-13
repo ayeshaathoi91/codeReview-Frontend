@@ -294,6 +294,7 @@ function Survey() {
                         <pre>
                           {formData.codereviewer}
                         </pre>
+                        </Typography>
                       </td>
                       <td className="border border-green-600">
                       <Rating
