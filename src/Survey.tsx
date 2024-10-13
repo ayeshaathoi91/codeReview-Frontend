@@ -112,15 +112,17 @@ function Survey() {
           return;
         }
         e.preventDefault();
+        const model_names = ['codereviewer', 'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3'];
         try {
 
           const dataToSend = {
             name: formData.name,
             organization: formData.organization,
+            model : model_names,
             data_id: formData.data_id,
-            model_information_score: formData.model_information_score,
-            model_relevance_score: formData.model_relevance_score,
-            model_explanation_clarity_score: formData.model_explanation_clarity_score,
+            information : formData.model_information_score,
+            relevance: formData.model_relevance_score,
+            explanation_clarity: formData.model_explanation_clarity_score,
             comment: formData.comment,
           };
           await addreview(dataToSend);
