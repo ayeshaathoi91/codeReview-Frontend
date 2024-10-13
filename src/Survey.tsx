@@ -285,35 +285,37 @@ function Survey() {
 
                       <td className="border border-green-600">{formData.codereviewer}</td>
                       <td className="border border-green-600">
-                        <Rating
-                          name="model_relevance_score"
-                          value={formData.model_relevance_score[0]}
-                          onChange={(e) => {
-                            formData.model_relevance_score[0] = e.target.value;
-                          }}
-                        />
+                      <Rating
+                      name="model_relevance_score[0]"
+                      value={formData.model_relevance_score[0]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_relevance_score: [newValue, ...formData.model_relevance_score.slice(1)] })
+                      }
+                      />
                       </td>
                       <td className="border border-green-600">
-                        <Rating
-                          name="model_information_score"
-                          value={formData.model_information_score[0]}
-                          onChange={(e) => {
-                            formData.model_information_score[0] = e.target.value;
-                          }}
-                        />
+                      <Rating
+                      name="model_information_score[0]"
+                      value={formData.model_information_score[0]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_information_score: [newValue, ...formData.model_information_score.slice(1)] })
+                      }
+                      />
                       </td>
                       <td className="border border-green-600">
-                        <Rating
-                          name="model_explanation_clarity_score"
-                          value={formData.model_explanation_clarity_score[0]}
-                          onChange={(e) => {
-                            formData.model_explanation_clarity_score[0] = e.target.value;
-                          }}
-                        />
+                      <Rating
+                      name="model_explanation_clarity_score[0]"
+                      value={formData.model_explanation_clarity_score[0]}
+                      onChange={(event, newValue) =>
+                          setFormData({ ...formData, model_explanation_clarity_score: [newValue, ...formData.model_explanation_clarity_score.slice(1)] })
+                      }
+                      />
                       </td>
-                     </tr>
-
+                      </tr>
+                      
                      
+
+
                    </tbody>
                  </table>
                </div>
