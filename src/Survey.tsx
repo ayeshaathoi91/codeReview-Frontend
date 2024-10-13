@@ -277,7 +277,7 @@ function Survey() {
                       'codellama', 'gemini', 'gpt_3_5', 'gpt_3_5_both', 
                       'gpt_3_5_cg', 'gpt_3_5_sum', 'llama2', 'llama3']; */}
                       
-                       <th className="border border-green-600" style={{padding: '10px'}}> 
+                       <th className="border border-green-600" style={{width: '200px'}}> 
                         Generated Output </th>
                        <th className="border border-green-600"> Relevance Score </th>
                        <th className="border border-green-600"> Information Score </th>
