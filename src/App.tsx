@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Survey from './Survey';
-import Instruction from './Instruction';
+import Survey from './Survey.tsx';
+import Instruction from './Instruction.tsx';
 
 export function App() {
     return (

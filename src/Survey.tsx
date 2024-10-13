@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate} from 'react-router-dom';
 import React, { useEffect} from 'react';
-import { addreview,viewData } from './apiCalls';
+import { addreview,viewData } from './apiCalls.tsx';
 
 
 import {
