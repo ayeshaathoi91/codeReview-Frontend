@@ -338,7 +338,7 @@ function Survey() {
                       
 
                       {/* Codellama */}
-                      <tr>
+                      {/* <tr>
 
                       <td className="border border-green-600 text-center" style={{width: "70%"}}>
                         <div class="word-wrap">
@@ -375,8 +375,7 @@ function Survey() {
                       }
                       />
                       </td>
-                      </tr>
-
+                      </tr> */}
 
                    </tbody>
                  </table>
